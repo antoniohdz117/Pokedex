@@ -1,6 +1,8 @@
+package com.daw.pokedex.model;
+
 import java.util.*;
 
-class Type {
+public class Type {
     private String name;
     private String url;
     // Getters and setters

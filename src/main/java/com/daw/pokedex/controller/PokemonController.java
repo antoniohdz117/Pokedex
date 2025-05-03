@@ -1,15 +1,18 @@
-package com.daw.pokemon.practicaSpring.controller;
+package com.daw.pokedex.controller;
 
+import com.daw.pokedex.model.*;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/pokemon/{pokemonId}")
-
+@RequestMapping("/api")
 public class PokemonController {
 
+    // Lista de Pokémon de ejemplo
     private final List<PokemonSummary> pokemonList = Arrays.asList(
             new PokemonSummary(30, "nidorina", 200,
                     List.of(new TypeSlot(new Type("poison", "https://pokeapi.co/api/v2/type/4/"), 1)),
@@ -58,7 +61,51 @@ public class PokemonController {
             )
     );
 
-    public List<PokemonSummary> getPokemonList() {
-        return pokemonList;
+    // Endpoint para obtener un Pokémon por ID
+    @GetMapping("/pokemon/{pokemonId}")
+    public Pokemon getPokemonById(@PathVariable int pokemonId) {
+        // Buscar el Pokémon en la lista por ID
+        Optional<PokemonSummary> pokemonSummary = pokemonList.stream()
+                .filter(p -> p.getId() == pokemonId)
+                .findFirst();
+
+        if (pokemonSummary.isPresent()) {
+            // Convertir PokemonSummary a Pokemon (aquí deberías agregar las evoluciones si las tienes)
+            PokemonSummary summary = pokemonSummary.get();
+            return new Pokemon(
+                    summary.getId(),
+                    summary.getName(),
+                    summary.getWeight(),
+                    summary.getTypes(),
+                    summary.getAbilities(),
+                    summary.getSprites(),
+                    getEvolutions(summary.getId()) // Método para obtener evoluciones (implementar según necesidad)
+            );
+        } else {
+            throw new RuntimeException("Pokémon no encontrado con ID: " + pokemonId);
+        }
+    }
+
+    // Endpoint para obtener lista paginada de Pokémon
+    @GetMapping("/pokedex")
+    public PokemonListResponse getPokedex(
+            @RequestParam(defaultValue = "0") int offset,
+            @RequestParam(defaultValue = "5") int limit) {
+
+        // Aplicar paginación
+        List<PokemonSummary> sublist = pokemonList.stream()
+                .skip(offset)
+                .limit(limit)
+                .collect(Collectors.toList());
+
+        // Crear respuesta con paginación
+        return new PokemonListResponse(pokemonList.size(), sublist);
+    }
+
+    // Método auxiliar para obtener evoluciones (debes implementarlo según tus necesidades)
+    private List<Evolution> getEvolutions(int pokemonId) {
+        // Aquí deberías implementar la lógica para obtener las evoluciones
+        // Por ahora devolvemos una lista vacía
+        return List.of();
     }
 }

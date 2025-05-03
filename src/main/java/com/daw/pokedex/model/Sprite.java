@@ -1,5 +1,7 @@
+package com.daw.pokedex.model;
+
 import  java.io.*;
-class Sprite {
+public class Sprite {
     private String front_default;
     // Getters and setters
 

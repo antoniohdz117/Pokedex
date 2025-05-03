@@ -1,6 +1,8 @@
+package com.daw.pokedex.model;
+
 import java.util.*;
 
-class PokemonListResponse {
+public class PokemonListResponse {
     private int count;
     private List<PokemonSummary> items;
     // Getters and setters

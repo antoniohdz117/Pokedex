@@ -1,3 +1,5 @@
+package com.daw.pokedex.model;
+
 class StatSlot {
     private int base_stat;
     private int effort;

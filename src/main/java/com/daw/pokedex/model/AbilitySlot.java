@@ -1,6 +1,8 @@
+package com.daw.pokedex.model;
+
 import java.util.*;
 
-class AbilitySlot {
+public class AbilitySlot {
     private Ability ability;
     private boolean is_hidden;
     private int slot;

@@ -1,3 +1,5 @@
+package com.daw.pokedex.model;
+
 import java.io.*;
 
 class Stat {

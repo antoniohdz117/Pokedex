@@ -1,6 +1,8 @@
+package com.daw.pokedex.model;
+
 import java.util.*;
 
-class PokemonSummary {
+public class PokemonSummary {
     private int id;
     private String name;
     private int weight;

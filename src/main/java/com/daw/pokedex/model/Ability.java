@@ -1,7 +1,9 @@
+package com.daw.pokedex.model;
+
 import java.util.*;
 
 
-class Ability {
+public class Ability {
     private String name;
     private String url;
     // Getters and setters

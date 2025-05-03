@@ -1,5 +1,13 @@
 package com.daw.pokedex.model;
 
+import java.util.List;
+
+import com.daw.pokedex.model.TypeSlot;
+import com.daw.pokedex.model.AbilitySlot;
+import com.daw.pokedex.model.Sprite;
+import com.daw.pokedex.model.StatSlot;
+import com.daw.pokedex.model.Evolution;
+
 
 public class Pokemon {
     private int id;
@@ -27,6 +35,9 @@ public class Pokemon {
         this.sprites = sprites;
         this.stats = stats;
         this.evolutions = evolutions;
+    }
+
+    public Pokemon(int id, String name, int weight, List<TypeSlot> types, List<AbilitySlot> abilities, Sprite sprites, List<Evolution> evolutions) {
     }
 
 
@@ -121,20 +132,3 @@ public class Pokemon {
         this.evolutions = evolutions;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
